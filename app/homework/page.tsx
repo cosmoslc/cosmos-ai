@@ -387,11 +387,11 @@ export default function HomeworkPage() {
                         type="text"
                         inputMode="numeric"
                         className="w-14"
-                        aria-label="Nechta rasm yuklash kerak"
+                        aria-label="Eng ko'pi bilan nechta rasm yuklash mumkin"
                         value={r.uploadCount ?? "1"}
                         onChange={(e) => updateRow(r.key, { uploadCount: e.target.value.replace(/\D/g, "") })}
                       />
-                      ta rasm
+                      tagacha rasm mumkin
                     </label>
                   )}
                 </div>
@@ -508,12 +508,12 @@ export default function HomeworkPage() {
                             )}
                             {edit.requiresUpload && (
                               <label className="flex items-center gap-2 text-sm text-ink-soft">
-                                Nechta rasm kerak
+                                Eng ko'pi bilan nechta rasm mumkin
                                 <input
                                   type="text"
                                   inputMode="numeric"
                                   className="w-16"
-                                  aria-label="Nechta rasm yuklash kerak"
+                                  aria-label="Eng ko'pi bilan nechta rasm yuklash mumkin"
                                   value={edit.uploadCount ?? "1"}
                                   onChange={(e) => setEdit({ ...edit, uploadCount: e.target.value.replace(/\D/g, "") })}
                                 />
@@ -557,7 +557,7 @@ export default function HomeworkPage() {
                           </p>
                           <p className="text-xs text-ink-soft">
                             {done}/{students.length} bajardi
-                            {a.requires_upload && ` · ${submitted.length} ta o'quvchi rasm yukladi (kerak: ${a.required_uploads ?? 1})`}
+                            {a.requires_upload && ` · ${submitted.length} ta o'quvchi rasm yukladi (${students.length - submitted.length} ta hali yo'q)`}
                           </p>
 
                           {a.requires_upload && submitted.length > 0 && (
@@ -571,7 +571,7 @@ export default function HomeworkPage() {
                                     {studentName(s.student_id)}
                                   </button>
                                   <ImageThumbs urls={sessionImages(s)} size={32} />
-                                  <span className="text-ink-soft">{sessionImages(s).length}/{a.required_uploads ?? 1}</span>
+                                  <span className="text-ink-soft">{sessionImages(s).length}/{a.required_uploads ?? 1} ta yuklandi</span>
                                   <button
                                     onClick={() => onToggleChecked(s)}
                                     className={s.checked ? "text-brand" : "text-ink-faint"}

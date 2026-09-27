@@ -185,7 +185,7 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
                               ) : (
                                 <span className="text-xs text-ink-soft">Rasm yuklanmagan</span>
                               )}
-                              <span className="text-xs text-ink-soft">{images.length}/{a.required_uploads ?? 1}</span>
+                              <span className="text-xs text-ink-soft">{images.length}/{a.required_uploads ?? 1} ta yuklandi</span>
                               {s?.checked && (
                                 <span className="inline-flex items-center gap-1 text-xs text-brand">
                                   <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />Tekshirilgan

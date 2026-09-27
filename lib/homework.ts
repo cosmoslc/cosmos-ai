@@ -48,10 +48,11 @@ export function sessionImages(s?: SessionRow): string[] {
   return s.submission_url ? [s.submission_url] : [];
 }
 
-/** Bajardi: fayl talab qilinsa — muddat ichida kerakli sondagi rasm yuklangan (server tekshiradi); aks holda vazifa yakunlangan. */
+/** Bajardi: fayl talab qilinsa — muddat ichida kamida bitta rasm yuklangan (server tekshiradi); aks holda vazifa yakunlangan.
+ *  `required_uploads` — eng ko'pi bilan nechta rasm yuklash mumkinligi (shart emas, chegara). */
 export function isAssignmentDone(a: Assignment, s?: SessionRow): boolean {
   if (!s) return false;
-  return a.requires_upload ? sessionImages(s).length >= (a.required_uploads ?? 1) : s.status === "completed";
+  return a.requires_upload ? sessionImages(s).length > 0 : s.status === "completed";
 }
 
 export async function fetchAssignmentsForGroup(groupId: string): Promise<Assignment[]> {
