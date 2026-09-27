@@ -5,9 +5,12 @@ import ImageThumbs from "@/components/ImageThumbs";
 import { swr } from "@/lib/cache";
 import { addDays, isoOfTimestamp, mondayOf, todayIso } from "@/lib/dates";
 import {
+  completionSeconds,
   fetchAssignmentsForGroup,
   fetchSessionsForStudent,
+  fmtMinSec,
   isAssignmentDone,
+  isSuspiciouslyFast,
   sessionImages,
   type Assignment,
   type HomeworkKind,
@@ -174,7 +177,14 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
                           <div className="flex items-start gap-2">
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium leading-snug">{a.title}</p>
-                              <p className="text-xs text-ink-soft">{KIND_LABEL[a.kind]} · {dateOf(a).slice(8, 10)}.{dateOf(a).slice(5, 7)}</p>
+                              <p className="text-xs text-ink-soft">
+                                {KIND_LABEL[a.kind]} · {dateOf(a).slice(8, 10)}.{dateOf(a).slice(5, 7)}
+                                {completionSeconds(s) !== null && (
+                                  <span className={isSuspiciouslyFast(a, s) ? "font-medium text-danger" : ""}>
+                                    {" "}· {fmtMinSec(completionSeconds(s)!)}da bajardi
+                                  </span>
+                                )}
+                              </p>
                             </div>
                             <span className={`shrink-0 rounded px-1.5 py-0.5 text-xs ${STATUS_CHIP[st].cls}`}>{STATUS_CHIP[st].text}</span>
                           </div>

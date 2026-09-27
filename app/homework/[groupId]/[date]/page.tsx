@@ -13,8 +13,11 @@ import { DAYS, lessonDaysOf } from "@/lib/constants";
 import { addDays, dayNameOf, isIsoDate, isoOfTimestamp, mondayOf, shortDate } from "@/lib/dates";
 import {
   fetchAssignmentsForGroup,
+  completionSeconds,
   fetchSessionsForAssignments,
+  fmtMinSec,
   isAssignmentDone,
+  isSuspiciouslyFast,
   sessionImages,
   markSessionChecked,
   type Assignment,
@@ -48,6 +51,22 @@ function statusChip(a: Assignment, s?: SessionRow): { text: string; cls: string 
 
 function pct(done: number, total: number): number {
   return total === 0 ? 0 : Math.round((done / total) * 100);
+}
+
+// O'quvchi vazifani boshlagandan tugatgungacha ketgan vaqt — "Start bosib darrov
+// Bajardim" bosilgan bo'lsa (belgilangan vaqtning uchdan biridan kam) qizil rangda ko'rinadi.
+function TimeTaken({ a, s }: { a: Assignment; s?: SessionRow }) {
+  const took = completionSeconds(s);
+  if (took === null) return null;
+  const suspicious = isSuspiciouslyFast(a, s);
+  return (
+    <span
+      className={`shrink-0 text-xs ${suspicious ? "font-medium text-danger" : "text-ink-soft"}`}
+      title={suspicious ? "Belgilangan vaqtning uchdan biridan kamida bajargan — gumonli" : "Boshlagandan tugatgungacha ketgan vaqt"}
+    >
+      {fmtMinSec(took)}
+    </span>
+  );
 }
 
 export default function HomeworkDayPage() {
@@ -246,6 +265,7 @@ export default function HomeworkDayPage() {
                             <button className="min-w-0 flex-1 truncate text-left hover:text-brand hover:underline" onClick={() => setProfile({ id: st.id, name: st.name, groupId })}>
                               {st.name}
                             </button>
+                            <TimeTaken a={a} s={s} />
                             <ImageThumbs urls={sessionImages(s)} size={40} />
                             {s && sessionImages(s).length > 0 && (
                               <button

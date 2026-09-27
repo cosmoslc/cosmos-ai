@@ -55,6 +55,30 @@ export function isAssignmentDone(a: Assignment, s?: SessionRow): boolean {
   return a.requires_upload ? sessionImages(s).length > 0 : s.status === "completed";
 }
 
+/** O'quvchi vazifani boshlagandan tugatgungacha ketgan real vaqt (soniya). Ikkala vaqt ham
+ *  server soati bilan yozilgani uchun bu "Start bosib, darrov Bajardim" holatini ko'rsatadi. */
+export function completionSeconds(s?: SessionRow): number | null {
+  if (!s || !s.started_at || !s.completed_at) return null;
+  return Math.max(0, Math.round((new Date(s.completed_at).getTime() - new Date(s.started_at).getTime()) / 1000));
+}
+
+export function fmtMinSec(totalSeconds: number): string {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  if (m === 0) return `${s} soniya`;
+  return s === 0 ? `${m} daq.` : `${m} daq. ${s} son.`;
+}
+
+/** Belgilangan vaqtning uchdan biridan kamida bajarilgan bo'lsa — "Start bosib darrov
+ *  tugatgan" gumon qilinadi (o'qish/yozish/gapirish uchun; tinglashda audio real vaqti
+ *  server tomonidan tasdiqlanadi, shuning uchun tekshirilmaydi). */
+export function isSuspiciouslyFast(a: Assignment, s?: SessionRow): boolean {
+  if (a.kind === "listening") return false;
+  const took = completionSeconds(s);
+  if (took === null) return false;
+  return took < Math.max(20, a.duration_seconds / 3);
+}
+
 export async function fetchAssignmentsForGroup(groupId: string): Promise<Assignment[]> {
   const { data, error } = await supabaseAi
     .from("homework_assignments")

@@ -16,8 +16,11 @@ import {
   updateAssignment,
   deleteAssignment,
   fetchAssignmentsForGroup,
+  completionSeconds,
   fetchSessionsForAssignment,
+  fmtMinSec,
   isAssignmentDone,
+  isSuspiciouslyFast,
   sessionImages,
   markSessionChecked,
   totalAudioSeconds,
@@ -570,6 +573,11 @@ export default function HomeworkPage() {
                                   >
                                     {studentName(s.student_id)}
                                   </button>
+                                  {completionSeconds(s) !== null && (
+                                    <span className={isSuspiciouslyFast(a, s) ? "font-medium text-danger" : "text-ink-soft"}>
+                                      {fmtMinSec(completionSeconds(s)!)}
+                                    </span>
+                                  )}
                                   <ImageThumbs urls={sessionImages(s)} size={32} />
                                   <span className="text-ink-soft">{sessionImages(s).length}/{a.required_uploads ?? 1} ta yuklandi</span>
                                   <button
