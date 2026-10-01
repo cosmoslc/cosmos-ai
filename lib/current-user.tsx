@@ -1,9 +1,10 @@
 "use client";
 // O'qituvchi asosiy (CRM) loyihadagi teachers_hr jadvalidagi telefon +
-// parol (SHA-256) bilan kiradi. Sessiya brauzerda (localStorage) saqlanadi.
+// parol (CRM formati: PBKDF2, eski SHA-256 ham) bilan kiradi. Sessiya brauzerda (localStorage) saqlanadi.
 // ESLATMA: bu client-side tekshiruv — haqiqiy Supabase Auth emas.
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "./supabase";
+import { verifyPassword } from "./password";
 
 export type Teacher = { id: string; name: string };
 
@@ -20,13 +21,6 @@ const CurrentUserContext = createContext<Ctx | null>(null);
 export function normalizePhone(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   return digits.length > 9 ? digits.slice(-9) : digits;
-}
-
-async function sha256Hex(text: string): Promise<string> {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
 }
 
 export function CurrentUserProvider({ children }: { children: ReactNode }) {
@@ -55,8 +49,7 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     if (error) return error.message;
 
     const match = (data ?? []).find((t) => normalizePhone(t.phone ?? "") === normalized);
-    if (!match || !match.password_hash) return "Telefon raqami yoki parol noto'g'ri.";
-    if (match.password_hash !== (await sha256Hex(password))) return "Telefon raqami yoki parol noto'g'ri.";
+    if (!match || !(await verifyPassword(password, match.password_hash))) return "Telefon raqami yoki parol noto'g'ri.";
 
     const t: Teacher = { id: match.id, name: match.name };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(t));
