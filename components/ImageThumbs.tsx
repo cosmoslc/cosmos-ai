@@ -31,7 +31,7 @@ export default function ImageThumbs({ urls, size = 48 }: { urls: string[]; size?
               e.stopPropagation();
               setOpen(i);
             }}
-            className="overflow-hidden rounded border border-line bg-paper hover:ring-2 hover:ring-brand/40"
+            className="overflow-hidden rounded-lg border border-line bg-paper hover:ring-2 hover:ring-brand/40"
             style={{ width: size, height: size }}
             aria-label={`Rasm ${i + 1} ni ko'rish`}
           >
@@ -43,7 +43,7 @@ export default function ImageThumbs({ urls, size = 48 }: { urls: string[]; size?
 
       {open !== null && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-4"
+          className="fixed inset-0 z-60 flex items-center justify-center bg-black/80 p-4"
           role="dialog"
           aria-modal="true"
           onClick={() => setOpen(null)}
@@ -86,7 +86,7 @@ export default function ImageThumbs({ urls, size = 48 }: { urls: string[]; size?
           <img
             src={urls[open]}
             alt={`Rasm ${open + 1}`}
-            className="max-h-[90vh] max-w-[92vw] rounded-md object-contain"
+            className="max-h-[90vh] max-w-[92vw] rounded-xl object-contain"
             onClick={(e) => e.stopPropagation()}
           />
           {urls.length > 1 && (

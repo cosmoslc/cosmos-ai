@@ -136,7 +136,7 @@ export default function GroupsPage() {
     return (
       <>
         <PageHeader title="Guruhlar" />
-        <p className="rounded-lg border border-dashed border-line p-8 text-center text-sm text-ink-soft">
+        <p className="rounded-xl border border-dashed border-line p-8 text-center text-sm text-ink-soft">
           Bu o'qituvchiga (teacher_hr_id) hech qanday guruh biriktirilmagan.
         </p>
       </>
@@ -146,9 +146,9 @@ export default function GroupsPage() {
   return (
     <>
       <PageHeader title="Guruhlar" hint="Guruhni tanlang va haftalik rejani qo'lda yozing yoki Fayllar bo'limidan AI bilan tuzdiring." />
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
-      <section className="min-w-0 rounded-lg border border-line bg-card">
+      <section className="min-w-0 rounded-xl border border-line bg-card">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line p-4">
           <div className="flex flex-wrap items-center gap-2">
             <select
@@ -181,11 +181,11 @@ export default function GroupsPage() {
         </p>
 
         <div className="flex items-center gap-2 px-4 pt-4">
-          <button className="btn-ghost !px-2" onClick={() => setWeekStart((w) => addDays(w, -7))} aria-label="Oldingi hafta">
+          <button className="btn-ghost px-2!" onClick={() => setWeekStart((w) => addDays(w, -7))} aria-label="Oldingi hafta">
             <ChevronLeft className="h-4 w-4" aria-hidden />
           </button>
           <span className="min-w-[120px] text-center text-sm font-medium">{shortDate(weekStart)} – {shortDate(addDays(weekStart, 5))}</span>
-          <button className="btn-ghost !px-2" onClick={() => setWeekStart((w) => addDays(w, 7))} aria-label="Keyingi hafta">
+          <button className="btn-ghost px-2!" onClick={() => setWeekStart((w) => addDays(w, 7))} aria-label="Keyingi hafta">
             <ChevronRight className="h-4 w-4" aria-hidden />
           </button>
           {weekStart !== currentWeekStart() && (
@@ -194,7 +194,7 @@ export default function GroupsPage() {
         </div>
 
         {editingFields && (
-          <p className="mx-4 mt-4 rounded-md bg-amber-tint p-3 text-xs text-ink-soft">
+          <p className="mx-4 mt-4 rounded-xl bg-amber-tint p-3 text-xs text-ink-soft">
             Har bir kun ustuni alohida sozlanadi: sarlavhani yozib o'zgartiring, ✕ bilan olib tashlang, ustun pastidagi tugma bilan input qo'shing.
           </p>
         )}
@@ -210,19 +210,19 @@ export default function GroupsPage() {
                   <div key={day} className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm font-semibold">{day} <span className="font-normal text-ink-soft">{shortDate(addDays(weekStart, DAYS.indexOf(day)))}</span></p>
-                      {item.source === "ai" && <span className="rounded bg-amber-tint px-1.5 py-0.5 text-xs text-amber">AI</span>}
+                      {item.source === "ai" && <span className="rounded-md bg-amber-tint px-1.5 py-0.5 text-xs text-amber">AI</span>}
                     </div>
                     {dayFields(day).map((f) => (
                       <div key={f.id} className="block">
                         {editingFields ? (
                           <div className="mb-1 flex items-center gap-1">
                             <input
-                              className="w-full !py-0.5 text-xs"
+                              className="w-full py-0.5! text-xs"
                               value={f.label}
                               aria-label="Maydon sarlavhasi"
                               onChange={(e) => renameField(day, f.id, e.target.value)}
                             />
-                            <button className="btn-ghost !px-1" onClick={() => removeField(day, f.id)} aria-label={`${f.label} maydonini olib tashlash`}>
+                            <button className="btn-ghost px-1!" onClick={() => removeField(day, f.id)} aria-label={`${f.label} maydonini olib tashlash`}>
                               <X className="h-3.5 w-3.5" aria-hidden />
                             </button>
                           </div>

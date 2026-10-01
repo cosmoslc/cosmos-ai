@@ -24,9 +24,9 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
-      <aside className="bg-gradient-to-b from-brand-dark via-brand-dark to-[#062E2B] text-white md:sticky md:top-0 md:h-screen md:w-64 md:shrink-0">
+      <aside className="bg-linear-to-b from-brand-dark via-brand-dark to-[#062E2B] text-white md:sticky md:top-0 md:h-screen md:w-64 md:shrink-0">
         <div className="flex items-center gap-3 px-5 py-5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-light to-brand shadow-lift">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient shadow-lift">
             <BookOpen className="h-5 w-5 text-white" aria-hidden />
           </span>
           <div className="leading-tight">
@@ -44,7 +44,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
                 aria-current={active ? "page" : undefined}
                 className={`group relative flex items-center gap-3 whitespace-nowrap rounded-xl px-3.5 py-2.5 text-sm transition ${
                   active
-                    ? "bg-white/15 font-semibold text-white shadow-sm ring-1 ring-white/10"
+                    ? "bg-white/15 font-semibold text-white shadow-xs ring-1 ring-white/10"
                     : "text-white/70 hover:bg-white/10 hover:text-white"
                 }`}
               >
@@ -57,13 +57,13 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="hidden p-3 md:absolute md:bottom-0 md:block md:w-64">
           <div className="flex items-center gap-3 rounded-xl bg-white/10 p-3 ring-1 ring-white/10">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-light to-brand text-sm font-bold">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold">
               {teacher.name.trim().charAt(0).toUpperCase()}
             </span>
             <p className="min-w-0 flex-1 truncate text-sm font-medium">{teacher.name}</p>
             <button
               onClick={logout}
-              className="shrink-0 rounded-lg p-2 text-red-400 transition hover:bg-red-500/15 hover:text-red-300"
+              className="shrink-0 rounded-xl p-2 text-red-400 transition hover:bg-red-500/15 hover:text-red-300"
               aria-label="Chiqish"
               title="Chiqish"
             >
@@ -72,7 +72,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </aside>
-      <main className="min-w-0 flex-1 p-4 md:p-10">{children}</main>
+      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
     </div>
   );
 }

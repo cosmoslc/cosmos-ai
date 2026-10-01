@@ -292,9 +292,9 @@ export default function HomeworkPage() {
         hint="Guruhni tanlang, vazifa qo'shing va hafta kunlari bo'yicha ko'ring. O'quvchi mobil ilovada Start bosgach vaqt hisoblanadi."
       />
 
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
-      <div className="mb-5 flex flex-wrap items-center gap-3">
+      <div className="mb-6 flex flex-wrap items-center gap-3">
         {teacherLoading ? (
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
         ) : (
@@ -314,7 +314,7 @@ export default function HomeworkPage() {
       {group && (
         <>
           {/* Yangi vazifa */}
-          <section className="mb-5 rounded-lg border border-line bg-card p-4">
+          <section className="mb-6 rounded-xl border border-line bg-card p-4">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
               <h2 className="flex items-center gap-2 font-semibold"><ClipboardList className="h-4 w-4" aria-hidden />Yangi vazifa</h2>
               <select aria-label="Dars kuni" value={dayName} onChange={(e) => setDayName(e.target.value)}>
@@ -326,7 +326,7 @@ export default function HomeworkPage() {
 
             <div className="space-y-3">
               {rows.map((r, idx) => (
-                <div key={r.key} className="rounded-md border border-line bg-paper p-3">
+                <div key={r.key} className="rounded-xl border border-line bg-paper p-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <input
                       className="min-w-[200px] flex-1"
@@ -411,11 +411,11 @@ export default function HomeworkPage() {
 
           {/* Hafta navigatsiyasi */}
           <div className="mb-3 flex items-center gap-2">
-            <button className="btn-ghost !px-2" onClick={() => setWeekOffset((w) => w - 1)} aria-label="Oldingi hafta">
+            <button className="btn-ghost px-2!" onClick={() => setWeekOffset((w) => w - 1)} aria-label="Oldingi hafta">
               <ChevronLeft className="h-4 w-4" aria-hidden />
             </button>
             <span className="min-w-[120px] text-center text-sm font-medium">{weekLabel}</span>
-            <button className="btn-ghost !px-2" onClick={() => setWeekOffset((w) => w + 1)} aria-label="Keyingi hafta">
+            <button className="btn-ghost px-2!" onClick={() => setWeekOffset((w) => w + 1)} aria-label="Keyingi hafta">
               <ChevronRight className="h-4 w-4" aria-hidden />
             </button>
             {weekOffset !== 0 && (
@@ -432,13 +432,13 @@ export default function HomeworkPage() {
                 return (
                   <section
                     key={day}
-                    className={`flex min-h-[220px] flex-col gap-3 rounded-lg border bg-card p-3 ${
+                    className={`flex min-h-[220px] flex-col gap-3 rounded-xl border bg-card p-3 ${
                       isToday ? "border-brand ring-2 ring-brand/15" : "border-line"
                     }`}
                   >
                     <Link
                       href={`/homework/${groupId}/${isoLocal(dayDates[i])}`}
-                      className="-m-1 flex items-baseline justify-between rounded-md border-b border-line p-1 pb-2 hover:bg-brand-tint"
+                      className="-m-1 flex items-baseline justify-between rounded-lg border-b border-line p-1 pb-2 hover:bg-brand-tint"
                       title="Shu kun bo'yicha batafsil"
                     >
                       <span className="text-sm font-semibold">{day}</span>
@@ -451,7 +451,7 @@ export default function HomeworkPage() {
                       const submitted = sessions.filter((s) => sessionImages(s).length > 0);
                       if (edit?.id === a.id) {
                         return (
-                          <article key={a.id} className="space-y-2 rounded-md border border-brand bg-paper p-2.5">
+                          <article key={a.id} className="space-y-2 rounded-xl border border-brand bg-paper p-2.5">
                             <input
                               className="w-full"
                               aria-label="Sarlavha"
@@ -523,10 +523,10 @@ export default function HomeworkPage() {
                               </label>
                             )}
                             <div className="flex gap-2">
-                              <button onClick={onSaveEdit} disabled={busy || !edit.title.trim()} className="btn-primary !px-2.5 !py-1.5">
+                              <button onClick={onSaveEdit} disabled={busy || !edit.title.trim()} className="btn-primary px-2.5! py-1.5!">
                                 <Check className="h-4 w-4" aria-hidden />Saqlash
                               </button>
-                              <button onClick={() => setEdit(null)} className="btn-ghost !px-2.5 !py-1.5">
+                              <button onClick={() => setEdit(null)} className="btn-ghost px-2.5! py-1.5!">
                                 <X className="h-4 w-4" aria-hidden />Bekor
                               </button>
                             </div>
@@ -534,7 +534,7 @@ export default function HomeworkPage() {
                         );
                       }
                       return (
-                        <article key={a.id} className="rounded-md border border-line bg-paper p-2.5">
+                        <article key={a.id} className="rounded-xl border border-line bg-paper p-2.5">
                           <div className="flex items-start justify-between gap-2">
                             <p className="text-sm font-medium leading-snug">
                               {a.title}

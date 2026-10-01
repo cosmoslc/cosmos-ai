@@ -112,10 +112,10 @@ export default function VocabularyPage() {
     <>
       <PageHeader title="Lug'at" hint="Fayl va (ixtiyoriy) mavzuni tanlang — AI shu mavzuga oid so'zlarni PDF ichidan ajratib beradi va natija pastdagi ro'yxatga qo'shiladi." />
 
-      <section className="mb-5 flex flex-wrap items-end gap-3 rounded-lg border border-line bg-card p-4">
+      <section className="mb-6 flex flex-wrap items-end gap-3 rounded-xl border border-line bg-card p-4">
         <label className="text-sm">
           Bo'lim
-          <select className="mt-1 block" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+          <select className="mt-1.5 block" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
             {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </label>
@@ -126,14 +126,14 @@ export default function VocabularyPage() {
           ) : files.length === 0 ? (
             <p className="mt-1 text-xs text-ink-soft">Bu bo'limda fayl yo'q</p>
           ) : (
-            <select className="mt-1 block" value={fileId} onChange={(e) => setFileId(e.target.value)}>
+            <select className="mt-1.5 block" value={fileId} onChange={(e) => setFileId(e.target.value)}>
               {files.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
             </select>
           )}
         </label>
         <label className="text-sm">
           Mavzu (ixtiyoriy)
-          <input className="mt-1 block" value={topic} placeholder="Masalan, Environment" onChange={(e) => setTopic(e.target.value)} />
+          <input className="mt-1.5 block" value={topic} placeholder="Masalan, Environment" onChange={(e) => setTopic(e.target.value)} />
         </label>
         <button className="btn-primary" disabled={extracting || !fileId} onClick={extract}>
           {extracting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : <Wand2 className="h-4 w-4" aria-hidden />}
@@ -141,19 +141,19 @@ export default function VocabularyPage() {
         </button>
       </section>
 
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
       {loadingSets ? (
         <p className="flex items-center gap-2 text-sm text-ink-soft"><Loader2 className="h-4 w-4 animate-spin" aria-hidden />Yuklanmoqda...</p>
       ) : sets.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-line p-8 text-center text-sm text-ink-soft">Hali lug'at ajratilmagan.</p>
+        <p className="rounded-xl border border-dashed border-line p-8 text-center text-sm text-ink-soft">Hali lug'at ajratilmagan.</p>
       ) : (
         <ul className="space-y-3">
           {sets.map((set) => {
             const open = openId === set.id;
             const words = wordsBySet[set.id];
             return (
-              <li key={set.id} className="rounded-lg border border-line bg-card">
+              <li key={set.id} className="rounded-xl border border-line bg-card">
                 <button
                   className="flex w-full items-center gap-3 p-4 text-left"
                   aria-expanded={open}

@@ -131,9 +131,9 @@ export default function ChatPage() {
         )}
       </PageHeader>
 
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
-      <section className="flex h-[65vh] flex-col rounded-lg border border-line bg-card">
+      <section className="flex h-[65vh] flex-col rounded-xl border border-line bg-card">
         <div className="flex-1 space-y-3 overflow-y-auto p-4" aria-live="polite">
           {loading ? (
             <p className="flex items-center gap-2 text-sm text-ink-soft"><Loader2 className="h-4 w-4 animate-spin" aria-hidden />Yuklanmoqda...</p>
@@ -147,7 +147,7 @@ export default function ChatPage() {
           ) : (
             messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : ""}`}>
-                <p className={`max-w-[80%] whitespace-pre-wrap rounded-lg px-3.5 py-2 text-sm leading-relaxed ${m.role === "user" ? "bg-brand text-white" : "bg-paper"}`}>{m.content}</p>
+                <p className={`max-w-[80%] whitespace-pre-wrap rounded-xl px-3.5 py-2 text-sm leading-relaxed ${m.role === "user" ? "bg-brand text-white" : "bg-paper"}`}>{m.content}</p>
               </div>
             ))
           )}

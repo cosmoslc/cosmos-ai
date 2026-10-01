@@ -69,9 +69,9 @@ export default function LoginsPage() {
         hint="Har bir o'quvchiga parol bering — u mobil ilovaga telefon raqami va shu parol bilan kiradi."
       />
 
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
-      <section className="rounded-lg border border-line bg-card">
+      <section className="rounded-xl border border-line bg-card">
         <div className="flex flex-wrap items-center gap-3 border-b border-line p-4">
           {teacherLoading ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

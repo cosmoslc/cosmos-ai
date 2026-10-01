@@ -1,8 +1,77 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+  Ranglar shu ilovaning o'ziniki (teal). Radius, bo'shliq va o'lchamlar Tailwind 4 standart shkalasida:
+  rounded-md 6px, rounded-lg 8px, rounded-xl 12px, rounded-2xl 16px.
+*/
+@theme {
+  --color-paper: #f5f7fa;
+  --color-card: #ffffff;
+
+  --color-ink: #172033;
+  --color-ink-soft: #5a6578;
+  --color-ink-faint: #8b95a7;
+
+  --color-line: #e4e8ef;
+
+  --color-brand: #0f766e;
+  --color-brand-dark: #0b4f4a;
+  --color-brand-light: #14b8a6;
+  --color-brand-tint: #e6f6f4;
+
+  --color-amber: #d97706;
+  --color-amber-tint: #fef3c7;
+
+  --color-danger: #dc2626;
+  --color-danger-tint: #fee9e7;
+
+  --shadow-soft:
+    0 1px 2px rgba(23, 32, 51, 0.04), 0 4px 16px rgba(23, 32, 51, 0.06);
+  --shadow-lift:
+    0 2px 4px rgba(23, 32, 51, 0.06), 0 12px 28px rgba(23, 32, 51, 0.1);
+
+  --font-sans: var(--font-onest), system-ui, sans-serif;
+}
+
+:root {
+  /* Asosiy gradient: tugmalar, logo plitkasi. O'zgartirish uchun shu qatorni tahrirlash yetadi. */
+  --brand-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%);
+}
+
+@utility bg-brand-gradient {
+  background-image: var(--brand-gradient);
+}
+
+/* Tugmalar: rounded-xl, px-4 py-2, text-sm, gap-2 */
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm transition-all
+         active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+@utility btn-primary {
+  @apply btn bg-brand-gradient font-semibold text-white shadow-md shadow-brand/20 hover:brightness-110;
+}
+
+@utility btn-ghost {
+  @apply btn border border-line bg-white font-medium text-ink hover:border-brand/40 hover:bg-brand-tint hover:text-brand-dark;
+}
 
 @layer base {
+  /* Tailwind 4 da border rangi currentcolor bo'ldi: rangsiz border'lar avvalgidek och kulrang qoladi */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-line, currentcolor);
+  }
+
+  /* Tailwind 4 tugmalarga default kursor beradi */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   html { background: #F5F7FA; }
   body {
     @apply bg-paper text-ink antialiased;
@@ -13,25 +82,17 @@
   }
   h1, h2, h3 { @apply tracking-tight; }
   :focus-visible { outline: 2px solid #0F766E; outline-offset: 2px; }
+
+  /* Inputlar: rounded-xl, px-4 py-2, text-sm; focus'da 2px halqa */
   input, select, textarea {
-    @apply rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink shadow-sm transition placeholder:text-ink-faint;
+    @apply rounded-xl border border-line bg-white px-4 py-2 text-sm text-ink transition placeholder:text-ink-faint;
   }
   input:hover, select:hover, textarea:hover { @apply border-ink-faint/60; }
-  input:focus, select:focus, textarea:focus { @apply border-brand outline-none ring-4 ring-brand/15; }
-  input[type="checkbox"] { @apply shadow-none; }
+  input:focus, select:focus, textarea:focus { @apply border-brand outline-hidden ring-2 ring-brand/20; }
+  input[type="checkbox"], input[type="radio"] { @apply rounded-sm p-0; }
 }
 
 @layer components {
-  .btn {
-    @apply inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition
-           active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
-  }
-  .btn-primary {
-    @apply btn bg-gradient-to-b from-brand-light to-brand text-white shadow-soft
-           hover:from-brand hover:to-brand-dark hover:shadow-lift;
-  }
-  .btn-ghost { @apply btn border border-line bg-white text-ink shadow-sm hover:border-brand/40 hover:bg-brand-tint hover:text-brand-dark; }
-
   /* Barcha kartalar (bg-card) yumshoq soya bilan */
   .bg-card { box-shadow: 0 1px 2px rgba(23, 32, 51, 0.04), 0 4px 16px rgba(23, 32, 51, 0.05); }
   li > .bg-card, input.bg-card, select.bg-card { box-shadow: none; }

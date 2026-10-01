@@ -132,12 +132,12 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
             <h2 className="truncate text-lg font-semibold">{target.name}</h2>
             <p className="text-xs text-ink-soft">Vazifalar statistikasi</p>
           </div>
-          <button className="btn-ghost !px-2" onClick={onClose} aria-label="Yopish">
+          <button className="btn-ghost px-2!" onClick={onClose} aria-label="Yopish">
             <X className="h-5 w-5" aria-hidden />
           </button>
         </header>
 
-        {error && <p role="alert" className="m-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+        {error && <p role="alert" className="m-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
         {!data && !error ? (
           <p className="flex items-center gap-2 p-4 text-sm text-ink-soft"><Loader2 className="h-4 w-4 animate-spin" aria-hidden />Yuklanmoqda...</p>
@@ -149,7 +149,7 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
                   <button
                     key={p}
                     onClick={() => setPeriod(p)}
-                    className={`rounded-lg border bg-card p-3 text-left ${period === p ? "border-brand ring-2 ring-brand/15" : "border-line"}`}
+                    className={`rounded-xl border bg-card p-3 text-left ${period === p ? "border-brand ring-2 ring-brand/15" : "border-line"}`}
                     aria-pressed={period === p}
                   >
                     <p className="text-xs text-ink-soft">
@@ -165,7 +165,7 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
               <section>
                 <h3 className="mb-2 text-sm font-semibold">{PERIOD_LABEL[period]} vazifalari ({list.length})</h3>
                 {list.length === 0 ? (
-                  <p className="rounded-lg border border-dashed border-line p-6 text-center text-sm text-ink-soft">Bu davrda vazifa berilmagan.</p>
+                  <p className="rounded-xl border border-dashed border-line p-6 text-center text-sm text-ink-soft">Bu davrda vazifa berilmagan.</p>
                 ) : (
                   <ul className="space-y-2">
                     {list.map((a) => {
@@ -173,7 +173,7 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
                       const st = statusOf(a, s, today);
                       const images = sessionImages(s);
                       return (
-                        <li key={a.id} className="rounded-lg border border-line bg-card p-3">
+                        <li key={a.id} className="rounded-xl border border-line bg-card p-3">
                           <div className="flex items-start gap-2">
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium leading-snug">{a.title}</p>
@@ -186,7 +186,7 @@ export default function StudentProfile({ target, onClose }: { target: ProfileTar
                                 )}
                               </p>
                             </div>
-                            <span className={`shrink-0 rounded px-1.5 py-0.5 text-xs ${STATUS_CHIP[st].cls}`}>{STATUS_CHIP[st].text}</span>
+                            <span className={`shrink-0 rounded-md px-1.5 py-0.5 text-xs ${STATUS_CHIP[st].cls}`}>{STATUS_CHIP[st].text}</span>
                           </div>
                           {a.requires_upload && (
                             <div className="mt-2 flex flex-wrap items-center gap-2">

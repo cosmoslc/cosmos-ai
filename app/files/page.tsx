@@ -148,7 +148,7 @@ export default function FilesPage() {
         ))}
       </div>
 
-      <section className="rounded-lg border border-line bg-card">
+      <section className="rounded-xl border border-line bg-card">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line p-4">
           <h2 className="font-semibold">{categories.find((c) => c.id === categoryId)?.name ?? ""} kitoblari</h2>
           <div className="flex flex-wrap items-center gap-2">
@@ -172,7 +172,7 @@ export default function FilesPage() {
         </div>
 
         {status?.warnings.map((w) => (
-          <p key={w} className="m-4 mb-0 flex items-start gap-2 rounded-md bg-amber-tint p-2.5 text-sm text-amber">
+          <p key={w} className="m-4 mb-0 flex items-start gap-2 rounded-xl bg-amber-tint p-2.5 text-sm text-amber">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />{w}
           </p>
         ))}
@@ -224,7 +224,7 @@ export default function FilesPage() {
       {notice && (
         <p
           role="status"
-          className={`mt-4 rounded-md p-3 text-sm ${notice.type === "ok" ? "bg-brand-tint text-brand-dark" : "bg-danger-tint text-danger"}`}
+          className={`mt-4 rounded-xl p-3 text-sm ${notice.type === "ok" ? "bg-brand-tint text-brand-dark" : "bg-danger-tint text-danger"}`}
         >
           {notice.text}
         </p>

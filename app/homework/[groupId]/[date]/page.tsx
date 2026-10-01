@@ -174,23 +174,23 @@ export default function HomeworkDayPage() {
         hint={group ? `${group.name} — shu kundagi vazifalar va o'quvchilar natijasi.` : undefined}
       />
 
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
       {teacherLoading || loading ? (
         <p className="flex items-center gap-2 text-sm text-ink-soft"><Loader2 className="h-4 w-4 animate-spin" aria-hidden />Yuklanmoqda...</p>
       ) : !group ? (
-        <p className="rounded-lg border border-dashed border-line p-8 text-center text-sm text-ink-soft">Bu guruh sizga biriktirilmagan.</p>
+        <p className="rounded-xl border border-dashed border-line p-8 text-center text-sm text-ink-soft">Bu guruh sizga biriktirilmagan.</p>
       ) : (
         <>
           {/* Kun statistikasi */}
-          <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
               { label: "Vazifalar", value: dayStats.count, sub: `${students.length} o'quvchi`, tone: "text-ink" },
               { label: "Qilgan o'quvchilar", value: dayStats.activeStudents, sub: "kamida bitta vazifani", tone: "text-brand" },
               { label: "Qilmagan o'quvchilar", value: dayStats.idleStudents, sub: "hech qaysini", tone: "text-danger" },
               { label: "Bajarilish", value: `${dayStats.percent}%`, sub: `${dayStats.done}/${dayStats.total} vazifa`, tone: "text-ink" },
             ].map((c) => (
-              <div key={c.label} className="rounded-lg border border-line bg-card p-4">
+              <div key={c.label} className="rounded-xl border border-line bg-card p-4">
                 <p className="text-xs text-ink-soft">{c.label}</p>
                 <p className={`mt-1 text-2xl font-bold ${c.tone}`}>{c.value}</p>
                 <p className="text-xs text-ink-soft">{c.sub}</p>
@@ -215,7 +215,7 @@ export default function HomeworkDayPage() {
                   <Link
                     key={d}
                     href={`/homework/${groupId}/${iso}`}
-                    className={`rounded-lg border bg-card p-3 transition hover:border-brand/50 ${current ? "border-brand ring-2 ring-brand/15" : "border-line"}`}
+                    className={`rounded-xl border bg-card p-3 transition hover:border-brand/50 ${current ? "border-brand ring-2 ring-brand/15" : "border-line"}`}
                   >
                     <p className="text-sm font-semibold">{d} <span className="font-normal text-ink-soft">{shortDate(iso)}</span></p>
                     <div className="mt-2 h-2 overflow-hidden rounded-full bg-line">
@@ -238,7 +238,7 @@ export default function HomeworkDayPage() {
               const missed = rows.filter((r) => !isDone(a, r.s));
               const percent = pct(done.length, students.length);
               return (
-                <section key={a.id} className="rounded-lg border border-line bg-card">
+                <section key={a.id} className="rounded-xl border border-line bg-card">
                   <div className="border-b border-line p-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <h3 className="font-semibold">
@@ -292,7 +292,7 @@ export default function HomeworkDayPage() {
                               <button className="min-w-0 flex-1 truncate text-left hover:text-brand hover:underline" onClick={() => setProfile({ id: st.id, name: st.name, groupId })}>
                                 {st.name}
                               </button>
-                              <span className={`rounded px-1.5 py-0.5 text-xs ${chip.cls}`}>{chip.text}</span>
+                              <span className={`rounded-md px-1.5 py-0.5 text-xs ${chip.cls}`}>{chip.text}</span>
                             </li>
                           );
                         })}
@@ -303,7 +303,7 @@ export default function HomeworkDayPage() {
               );
             })}
             {dayAssignments.length === 0 && (
-              <p className="rounded-lg border border-dashed border-line p-8 text-center text-sm text-ink-soft">
+              <p className="rounded-xl border border-dashed border-line p-8 text-center text-sm text-ink-soft">
                 Bu kunga vazifa berilmagan.
               </p>
             )}

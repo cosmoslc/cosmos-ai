@@ -83,14 +83,14 @@ export default function PrintPage() {
   return (
     <>
       <PageHeader title="Print" hint="Kerakli betlarni tanlab printerga yuboring. Printer band bo'lsa, navbat holati ko'rsatiladi." />
-      {error && <p role="alert" className="mb-4 rounded-md bg-danger-tint p-3 text-sm text-danger">{error}</p>}
+      {error && <p role="alert" className="mb-4 rounded-xl bg-danger-tint p-3 text-sm text-danger">{error}</p>}
 
       <div className="grid gap-5 lg:grid-cols-[340px_1fr]">
-        <section className="space-y-3 rounded-lg border border-line bg-card p-4">
+        <section className="space-y-3 rounded-xl border border-line bg-card p-4">
           <h2 className="font-semibold">Yangi chop etish</h2>
           <label className="block text-sm">
             Bo'lim
-            <select className="mt-1 w-full" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+            <select className="mt-1.5 w-full" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
               {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </label>
@@ -99,14 +99,14 @@ export default function PrintPage() {
             {files.length === 0 ? (
               <p className="mt-1 text-xs text-ink-soft">Bu bo'limda fayl yo'q</p>
             ) : (
-              <select className="mt-1 w-full" value={fileId} onChange={(e) => setFileId(e.target.value)}>
+              <select className="mt-1.5 w-full" value={fileId} onChange={(e) => setFileId(e.target.value)}>
                 {files.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
               </select>
             )}
           </label>
           <label className="block text-sm">
             Betlar
-            <input className="mt-1 w-full" value={pages} placeholder="Masalan, 24-27" onChange={(e) => setPages(e.target.value)} />
+            <input className="mt-1.5 w-full" value={pages} placeholder="Masalan, 24-27" onChange={(e) => setPages(e.target.value)} />
           </label>
           <button className="btn-primary" disabled={!pages.trim() || !fileId || submitting} onClick={submit}>
             {submitting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : <Printer className="h-4 w-4" aria-hidden />}
@@ -116,7 +116,7 @@ export default function PrintPage() {
 
         <section className="space-y-3">
           {pending && (
-            <div role="alert" className="rounded-lg border border-amber bg-amber-tint p-4">
+            <div role="alert" className="rounded-xl border border-amber bg-amber-tint p-4">
               <p className="text-sm font-medium">Printer band. Sizning oldingizda {activeCount} ta ish bor.</p>
               <p className="mt-1 text-sm text-ink-soft">Navbatga qo'shib, kutasizmi?</p>
               <div className="mt-3 flex gap-2">
@@ -125,7 +125,7 @@ export default function PrintPage() {
               </div>
             </div>
           )}
-          <div className="rounded-lg border border-line bg-card">
+          <div className="rounded-xl border border-line bg-card">
             <h2 className="border-b border-line p-4 font-semibold">Navbat</h2>
             {jobs.length === 0 ? (
               <p className="p-4 text-sm text-ink-soft">Navbat bo'sh.</p>

@@ -53,7 +53,7 @@ export default function AudioListEditor({ files, onChange }: { files: AudioFile[
       {files.length > 0 && (
         <ol className="space-y-1">
           {files.map((f, i) => (
-            <li key={f.url} className="flex items-center gap-2 rounded border border-line bg-card px-2 py-1 text-sm">
+            <li key={f.url} className="flex items-center gap-2 rounded-lg border border-line bg-card px-2 py-1 text-sm">
               <span className="w-5 text-center text-xs text-ink-soft">{i + 1}</span>
               <span className="min-w-0 flex-1 truncate">{f.name}</span>
               <span className="text-xs text-ink-soft">{fmtDuration(f.duration_seconds)}</span>
